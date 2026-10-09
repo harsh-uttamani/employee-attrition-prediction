@@ -1,0 +1,53 @@
+
+/* ============================================================
+   UTILITY CLASSES FOR PRESENTATION
+   ============================================================ */
+.mt-30 { margin-top: 30px; }
+.mt-25 { margin-top: 25px; }
+.mt-15 { margin-top: 15px; }
+.mt-5 { margin-top: 5px; }
+.mb-30 { margin-bottom: 30px; }
+.mb-20 { margin-bottom: 20px; }
+.mb-8 { margin-bottom: 8px; }
+.pt-15 { padding-top: 15px; }
+.border-top { border-top: 1px solid var(--border); }
+
+.d-block { display: block; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.center-card { text-align: center; }
+
+.text-lg { font-size: 1.1rem; }
+.text-md { font-size: 0.95rem; }
+.text-sm { font-size: 0.9rem; }
+.text-white { color: var(--text) !important; }
+.text-emerald { color: var(--emerald) !important; }
+.text-coral { color: var(--coral) !important; }
+.text-muted { color: var(--text-muted); }
+.fw-bold { font-weight: bold; }
+
+.no-border { border: none !important; background: var(--emerald-dim); }
+
+.methodology-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.methodology-table tr { border-bottom: 1px solid var(--border); }
+.methodology-table th, .methodology-table td { padding: 10px; }
+.th-left { color: var(--emerald); text-align: left; }
+.th-right { text-align: right; }
+.td-left { text-align: left; }
+.td-right { text-align: right; color: var(--text-muted); }
+.tr-highlight { background: rgba(53, 217, 155, 0.05); }
+
+.prediction-box {
+  background: var(--bg);
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+.pred-pct { font-size: 3rem; font-weight: 700; color: var(--coral); font-family: var(--font-display); line-height: 1; }
+.pred-lbl { font-size: 0.9rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 15px; margin-top: 5px; }
+.pred-arrow { font-size: 1.5rem; color: var(--text); font-weight: bold; font-family: var(--font-display); }
+.pred-verdict { font-size: 1.2rem; font-weight: bold; color: var(--coral); margin-top: 10px; }
+
+.flow-node.dim { border-color: var(--text-muted); color: var(--text); }
+.flow-node.bg-emerald { background: var(--emerald-dim); }

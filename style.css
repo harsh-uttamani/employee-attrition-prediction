@@ -1,0 +1,99 @@
+/* ============================================================
+   StaySense - Modern Bootstrap 5 Overrides & AI Theme
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css");
+
+:root {
+  --bs-body-font-family: 'Plus Jakarta Sans', sans-serif;
+  --bs-primary: #0d6efd;
+  --bs-primary-rgb: 13, 110, 253;
+  
+  /* Custom Gradients */
+  --grad-primary: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+  --grad-success: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  --grad-danger: linear-gradient(135deg, #fb7185 0%, #e11d48 100%);
+}
+
+body {
+  font-family: var(--bs-body-font-family);
+  background-color: #0f172a !important; /* Deep Slate Background */
+  color: #f8fafc;
+}
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: rgba(30, 41, 59, 0.7) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Gradients for Text */
+.text-gradient {
+  background: var(--grad-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Form Controls */
+.form-control, .form-select {
+  background-color: rgba(15, 23, 42, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #f8fafc !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: rgba(15, 23, 42, 0.8) !important;
+  border-color: #38bdf8 !important;
+  box-shadow: 0 0 0 0.25rem rgba(56, 189, 248, 0.25) !important;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--grad-primary);
+  border: none;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, #7dd3fc 0%, #2563eb 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+}
+
+.btn-success {
+  background: var(--grad-success);
+  border: none;
+}
+
+.btn-danger {
+  background: var(--grad-danger);
+  border: none;
+}
+
+/* Custom Overrides for inputs inside floating labels */
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+  color: #38bdf8;
+  transform: scale(.85) translateY(-.5rem) translateX(.15rem);
+}
+
+/* Result Circular Gauge */
+.border-success { border-color: #10b981 !important; }
+.border-danger { border-color: #ef4444 !important; }
+.text-success { color: #10b981 !important; }
+.text-danger { color: #ef4444 !important; }
+.bg-success { background-color: #10b981 !important; }
+.bg-danger { background-color: #ef4444 !important; }
+
+/* Miscellaneous Layout Tweaks */
+.card-header h5 {
+  letter-spacing: -0.01em;
+}
+
+.navbar {
+  background: rgba(15, 23, 42, 0.8) !important;
+  backdrop-filter: blur(10px);
+}

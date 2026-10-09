@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Methodology - StaySense</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <!-- Custom CSS Overrides -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+    .presentation-wrapper {
+      height: 100vh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+    }
+    .slide {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 4rem 1rem;
+      position: relative;
+    }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: rgba(255,255,255,0.4);
+      font-size: 1.5rem;
+    }
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+      40% { transform: translateY(-10px) translateX(-50%); }
+      60% { transform: translateY(-5px) translateX(-50%); }
+    }
+    /* Hide scrollbar for cleaner presentation */
+    .presentation-wrapper::-webkit-scrollbar { display: none; }
+    .presentation-wrapper { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    .chip {
+      display: inline-block;
+      padding: 0.35rem 0.8rem;
+      font-size: 0.85rem;
+      border-radius: 50px;
+      margin: 0.2rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: #94a3b8;
+    }
+    .chip.top {
+      background: rgba(13, 110, 253, 0.1);
+      border-color: rgba(13, 110, 253, 0.4);
+      color: #38bdf8;
+      font-weight: 600;
+    }
+    .pipeline-step {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 0.5rem;
+    }
+    .pipeline-arrow {
+      color: #64748b;
+      margin: 0 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="bg-body-tertiary">
+
+<!-- Back Navigation -->
+<nav class="navbar navbar-dark bg-transparent position-fixed w-100 top-0" style="z-index: 1050;">
+  <div class="container-fluid px-4 pt-3">
+    <a class="btn btn-outline-secondary rounded-pill px-4 shadow-sm backdrop-blur" style="background: rgba(15,23,42,0.8);" href="/">
+      <i class="bi bi-arrow-left me-2"></i> Back to Dashboard
+    </a>
+  </div>
+</nav>
+
+<div class="presentation-wrapper">
+
+  <!-- SLIDE 1: OVERVIEW -->
+  <section class="slide">
+    <div class="container" style="max-width: 1000px;">
+      
+      <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-gradient mb-3">Employee Attrition Prediction</h1>
+        <h4 class="text-muted fw-normal">Project Overview & Methodology</h4>
+      </div>
+
+      <div class="card glass-panel shadow-lg border-0 rounded-4 mb-4">
+        <div class="card-body p-4">
+          <h5 class="fw-bold text-info mb-3"><i class="bi bi-info-circle me-2"></i>What This System Does</h5>
+          <p class="text-muted mb-0" style="line-height: 1.7; font-size: 1.05rem;">
+            This project is an early-warning system designed to identify employees at high risk of leaving the company. By analyzing historical HR data, it uses Machine Learning—starting with a <strong>Logistic Regression baseline</strong> and culminating in a <strong>Random Forest</strong> model—to predict whether an employee will <strong>Leave</strong> or <strong>Stay</strong>, along with a probability percentage. This empowers HR to make proactive, data-driven retention decisions rather than reacting after a resignation.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4 mb-5">
+        <div class="col-md-6">
+          <div class="card glass-panel border-0 rounded-4 h-100 p-3">
+            <h6 class="text-uppercase text-muted fw-bold mb-2">The Problem</h6>
+            <p class="text-light mb-0">Replacing trained employees is highly expensive. HR currently lacks a way to foresee attrition risk proactively.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card glass-panel border-0 rounded-4 h-100 p-3">
+            <h6 class="text-uppercase text-muted fw-bold mb-2">The Objective</h6>
+            <p class="text-light mb-0">Use machine learning on known employee factors to predict future attrition accurately and output actionable insights.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex flex-wrap justify-content-center align-items-center gap-3 p-4 glass-panel rounded-4 text-center mx-auto" style="max-width: 800px;">
+        <div class="badge bg-secondary p-3 fs-6 rounded-pill shadow-sm"><i class="bi bi-person-lines-fill me-2"></i>Employee Input</div>
+        <i class="bi bi-arrow-right fs-4 text-muted"></i>
+        <div class="badge bg-primary p-3 fs-6 rounded-pill shadow-sm"><i class="bi bi-cpu me-2"></i>Machine Learning</div>
+        <i class="bi bi-arrow-right fs-4 text-muted"></i>
+        <div class="badge p-3 fs-6 rounded-pill shadow-sm" style="background: linear-gradient(135deg, #34d399 0%, #059669 100%); border: none;"><i class="bi bi-graph-up-arrow me-2"></i>Attrition Prediction</div>
+      </div>
+
+    </div>
+    <div class="scroll-indicator"><i class="bi bi-chevron-double-down"></i></div>
+  </section>
+
+  <!-- SLIDE 2: METHODOLOGY & DATA -->
+  <section class="slide">
+    <div class="container" style="max-width: 1000px;">
+      
+      <h2 class="fw-bold text-gradient mb-4 text-center">Data & Models</h2>
+
+      <!-- Pipeline -->
+      <div class="card glass-panel shadow-sm border-0 rounded-4 mb-4">
+        <div class="card-body p-4 text-center">
+          <h6 class="text-uppercase text-muted fw-bold mb-3">Analysis Pipeline</h6>
+          <div class="d-flex flex-wrap justify-content-center align-items-center">
+            <span class="pipeline-step">Data</span> <i class="bi bi-arrow-right pipeline-arrow"></i>
+            <span class="pipeline-step">Preprocessing</span> <i class="bi bi-arrow-right pipeline-arrow"></i>
+            <span class="pipeline-step">Feature Engineering</span> <i class="bi bi-arrow-right pipeline-arrow"></i>
+            <span class="pipeline-step">Model</span> <i class="bi bi-arrow-right pipeline-arrow"></i>
+            <span class="pipeline-step text-primary" style="border-color: #38bdf8;">Prediction</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Models -->
+      <div class="row g-4 mb-4">
+        <div class="col-md-6">
+          <div class="card glass-panel border-0 rounded-4 h-100 p-4">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <h5 class="fw-bold mb-0">Logistic Regression</h5>
+              <span class="badge bg-secondary">Baseline</span>
+            </div>
+            <p class="text-muted small mb-0">A standard linear approach. Used to establish a performance baseline, but struggles to capture complex, non-linear human behavior patterns.</p>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card glass-panel border-0 rounded-4 h-100 p-4" style="border-left: 4px solid #38bdf8 !important;">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <h5 class="fw-bold mb-0 text-primary">Random Forest</h5>
+              <span class="badge bg-primary">Final Model</span>
+            </div>
+            <p class="text-muted small mb-0">An ensemble of decision trees. Successfully captures complex interactions between HR factors like income, overtime, and satisfaction.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="card glass-panel border-0 rounded-4 p-4">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <h6 class="text-uppercase text-muted fw-bold mb-2">Feature Engineering</h6>
+            <div class="mb-3">
+              <span class="badge bg-danger bg-opacity-25 text-danger mb-1 border border-danger border-opacity-50">Dropped (Zero Variance)</span><br>
+              <span class="small text-muted">EmployeeCount, StandardHours, Over18, EmployeeNumber</span>
+            </div>
+            <div>
+              <span class="badge bg-success bg-opacity-25 text-success mb-1 border border-success border-opacity-50">Encoded & Kept</span><br>
+              <span class="small text-muted">The 30 mathematical factors analyzed by the model.</span>
+            </div>
+          </div>
+          <div class="col-md-8 border-start border-secondary">
+            <div class="ms-md-3">
+              <!-- Top 10 Influential Features -->
+              <span class="chip top">Monthly Income</span>
+              <span class="chip top">OverTime</span>
+              <span class="chip top">Age</span>
+              <span class="chip top">Total Working Years</span>
+              <span class="chip top">Years At Company</span>
+              <span class="chip top">Daily Rate</span>
+              <span class="chip top">Job Satisfaction</span>
+              <span class="chip top">Distance From Home</span>
+              <span class="chip top">Years With Curr Manager</span>
+              <span class="chip top">Stock Option Level</span>
+              <!-- Remaining 20 Features -->
+              <span class="chip">Business Travel</span>
+              <span class="chip">Department</span>
+              <span class="chip">Education</span>
+              <span class="chip">Education Field</span>
+              <span class="chip">Environment Satisfaction</span>
+              <span class="chip">Gender</span>
+              <span class="chip">Hourly Rate</span>
+              <span class="chip">Job Involvement</span>
+              <span class="chip">Job Level</span>
+              <span class="chip">Job Role</span>
+              <span class="chip">Marital Status</span>
+              <span class="chip">Monthly Rate</span>
+              <span class="chip">Num Companies Worked</span>
+              <span class="chip">Percent Salary Hike</span>
+              <span class="chip">Performance Rating</span>
+              <span class="chip">Relationship Satisfaction</span>
+              <span class="chip">Training Times Last Year</span>
+              <span class="chip">Work Life Balance</span>
+              <span class="chip">Years In Current Role</span>
+              <span class="chip">Years Since Last Promotion</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="scroll-indicator"><i class="bi bi-chevron-double-down"></i></div>
+  </section>
+
+  <!-- SLIDE 3: RESULTS & SYSTEM -->
+  <section class="slide">
+    <div class="container" style="max-width: 1000px;">
+      
+      <h2 class="fw-bold text-gradient mb-4 text-center">Results & System Architecture</h2>
+
+      <div class="row g-4">
+        
+        <!-- Results Table -->
+        <div class="col-md-6">
+          <div class="card glass-panel shadow-sm border-0 rounded-4 h-100 p-4">
+            <h5 class="fw-bold mb-4 text-info"><i class="bi bi-bar-chart-fill me-2"></i>Model Performance</h5>
+            <div class="table-responsive">
+              <table class="table table-dark table-borderless table-sm mb-4">
+                <thead class="border-bottom border-secondary">
+                  <tr>
+                    <th class="text-muted pb-2">Metric</th>
+                    <th class="text-muted pb-2">Log Reg</th>
+                    <th class="text-primary pb-2">Random Forest</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="pt-2">Accuracy</td>
+                    <td class="pt-2">87.41%</td>
+                    <td class="pt-2">82.65%</td>
+                  </tr>
+                  <tr>
+                    <td>Precision</td>
+                    <td>69.23%</td>
+                    <td>46.30%</td>
+                  </tr>
+                  <tr style="background: rgba(56, 189, 248, 0.05);">
+                    <td class="fw-bold text-light">Recall</td>
+                    <td>38.30%</td>
+                    <td class="text-primary fw-bold">53.19%</td>
+                  </tr>
+                  <tr style="background: rgba(56, 189, 248, 0.05);">
+                    <td class="fw-bold text-light pb-2">F1 Score</td>
+                    <td class="pb-2">49.32%</td>
+                    <td class="text-primary fw-bold pb-2">49.50%</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="p-3 rounded-3 mt-auto" style="background: rgba(255,255,255,0.03);">
+              <h6 class="fw-bold text-light mb-1">Why Random Forest?</h6>
+              <p class="small text-muted mb-0">In attrition prediction, successfully identifying potential leavers (Recall) is far more critical than raw accuracy. Random Forest provides significantly higher Recall.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Architecture -->
+        <div class="col-md-6">
+          
+          <!-- MongoDB Auth Card -->
+          <div class="card glass-panel shadow-sm border-0 rounded-4 p-4 mb-4" style="border-left: 4px solid #10b981 !important;">
+            <h5 class="fw-bold mb-2 text-success"><i class="bi bi-database-fill-lock me-2"></i>Authentication & Database</h5>
+            <p class="small text-muted mb-0">
+              <strong>MongoDB</strong> is integrated into the system to manage company/user registration and login securely. It stores the required authentication information and securely associates users with their company, allowing only authorized administrators to access the Employee Attrition Prediction System.
+            </p>
+          </div>
+
+          <!-- Prediction Output -->
+          <div class="card glass-panel shadow-sm border-0 rounded-4 p-4 text-center">
+            <h5 class="fw-bold mb-3 text-light">Prediction Flow</h5>
+            <div class="d-flex justify-content-center align-items-center gap-2 mb-4 mt-2">
+               <span class="badge bg-secondary p-2"><i class="bi bi-person me-1"></i>Auth User</span>
+               <i class="bi bi-arrow-right text-muted"></i>
+               <span class="badge bg-primary p-2"><i class="bi bi-cpu me-1"></i>RF Model</span>
+               <i class="bi bi-arrow-right text-muted"></i>
+               <span class="badge bg-danger p-2"><i class="bi bi-exclamation-triangle me-1"></i>Leave (75%)</span>
+            </div>
+            <p class="small text-muted mb-0">
+              The system acts as a proactive early-warning tool, supporting data-driven HR decisions and targeted retention strategies securely.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
